@@ -83,3 +83,22 @@ class TokenBlacklistMiddleware(MiddlewareMixin):
             except:
                 pass
         return None
+############################################################################ 
+# or
+class CustomMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+        # One-time configuration and initialization
+
+    def __call__(self, request):
+        # Code to be executed for each request before
+        # the view (and later middleware) are called.
+        print('CustomMiddleware: Before the request is processed')
+
+        response = self.get_response(request)
+
+        # Code to be executed for each request/response after
+        # the view is called.
+        print('CustomMiddleware: After the request is processed')
+
+        return response
